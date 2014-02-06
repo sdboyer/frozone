@@ -1,6 +1,6 @@
 # Frozone
 
-[Frozone stops writes like a boss](frozone.jpg)
+![Frozone stops writes like a boss](frozone.jpg)
 
 Managing state sucks. Frozone is a simple set of interfaces and traits (so, PHP >=5.4) that implement some patterns to make it easier. It facilitates two cases:
 
