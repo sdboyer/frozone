@@ -39,11 +39,11 @@ class LockableTraitTest extends \PHPUnit_Framework_Testcase {
 
     public function testCustomException() {
         try {
-            $this->stub->doCustom($foobar);
+            $this->stub->doCustom('foobar');
             $this->fail();
         }
         catch (LockedObjectException $e) {
-            $this->assertEquals($foobar, $e->getMessage());
+            $this->assertEquals('foobar', $e->getMessage());
         }
     }
 

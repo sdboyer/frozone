@@ -41,11 +41,11 @@ class FreezableTraitTest extends \PHPUnit_Framework_Testcase {
 
     public function testCustomException() {
         try {
-            $this->stub->doCustom($foobar);
+            $this->stub->doCustom('foobar');
             $this->fail();
         }
         catch (FrozenObjectException $e) {
-            $this->assertEquals($foobar, $e->getMessage());
+            $this->assertEquals('foobar', $e->getMessage());
         }
     }
 }
