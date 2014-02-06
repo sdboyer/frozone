@@ -1,0 +1,70 @@
+<?php
+
+namespace Frozone;
+
+class FreezableTraitTest extends \PHPUnit_Framework_Testcase {
+    protected $stub;
+
+    public function setUp() {
+        $this->stub = new FreezableStub();
+        $this->stub->freeze();
+    }
+
+    public function testInitiallyNotFrozen() {
+        $stub = new FreezableStub();
+        $this->assertFalse($stub->doDefault());
+    }
+
+    public function testFreezeIsIdempotent() {
+        $this->assertTrue($this->stub->isFrozen());
+        $this->stub->freeze();
+        $this->assertTrue($this->stub->isFrozen());
+    }
+
+    public function testDefaultException() {
+        try {
+            $this->stub->doDefault();
+            $this->fail();
+        }
+        catch (FrozenObjectException $e) {}
+    }
+
+    public function testMethodException() {
+        try {
+            $this->stub->doMethod();
+            $this->fail();
+        }
+        catch (FrozenObjectException $e) {
+            $this->assertTrue((bool) strpos($e->getMessage(), 'FreezableStub::doMethod'));
+        }
+    }
+
+    public function testCustomException() {
+        try {
+            $this->stub->doCustom($foobar);
+            $this->fail();
+        }
+        catch (FrozenObjectException $e) {
+            $this->assertEquals($foobar, $e->getMessage());
+        }
+    }
+}
+
+class FreezableStub {
+    use FreezableTrait;
+
+    public function doDefault() {
+        $this->attemptWrite();
+        return FALSE;
+    }
+
+    public function doMethod() {
+        $this->attemptWriteWithMethod(__METHOD__);
+        return FALSE;
+    }
+
+    public function doCustom($msg) {
+        $this->attemptWriteWithMessage($msg);
+        return FALSE;
+    }
+}
