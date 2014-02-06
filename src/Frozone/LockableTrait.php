@@ -1,5 +1,7 @@
 <?php
 
+namespace Frozone;
+
 /**
  * Trait implementing Lockable.
  *
@@ -39,7 +41,7 @@ trait LockableTrait /* implements Lockable */ {
     }
 
     public function unlock($key) {
-        if (!$this->_tisLocked()) {
+        if (!$this->isLocked()) {
             throw new LockedObjectException('Object is not locked', E_WARNING);
         }
 
