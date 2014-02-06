@@ -6,9 +6,9 @@ namespace Frozone;
  * Trait implementing Freezable.
  *
  * Make sure to begin any state-mutating method in the composed class with
- * a call to $this->attemptWrite(__METHOD__).
+ * a call to one of the $this->attemptWrite*() methods.
  */
-trait Freeze /* implements FreezableInterface */ {
+trait FreezableTrait /* implements Freezable */ {
 
     /**
      * State flag indicating whether or not this object is frozen.
@@ -37,7 +37,7 @@ trait Freeze /* implements FreezableInterface */ {
      */
     protected function attemptWrite() {
         if ($this->isFrozen()) {
-            throw new FrozenObjectException(sprintf('State-changing method called on instance of %s.', __CLASS__));
+            throw new FrozenObjectException(sprintf('State-changing method called on frozen instance of %s.', __CLASS__));
         }
     }
 
@@ -45,7 +45,8 @@ trait Freeze /* implements FreezableInterface */ {
      * Checks if the object is frozen and throws an exception if it is.
      *
      * @param string $method
-     *   The name of the method that was originally called.
+     *   The name of the method that was originally called. Your code should
+     *   pass __METHOD__ to this.
      *
      * @throws FrozenObjectException
      */
@@ -59,7 +60,7 @@ trait Freeze /* implements FreezableInterface */ {
      * Checks if the object is frozen and throws an exception if it is.
      *
      * @param string $msg
-     *   The message to use in the exception, if frozen.
+     *   The message to use in the exception, if one is thrown.
      *
      * @throws FrozenObjectException
      */
