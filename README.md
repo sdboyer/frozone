@@ -3,6 +3,7 @@
 ![Frozone stops writes like a boss](frozone.jpg)
 [![Build Status](https://travis-ci.org/sdboyer/frozone.png?branch=master)](https://travis-ci.org/sdboyer/frozone)
 [![Coverage Status](https://coveralls.io/repos/sdboyer/frozone/badge.png)](https://coveralls.io/r/sdboyer/frozone)
+[![Latest Stable Version](https://poser.pugx.org/sdboyer/frozone/v/stable.png)](https://packagist.org/packages/sdboyer/frozone)
 
 Managing state sucks. Frozone is a simple set of interfaces and traits (so, PHP >=5.4) that implement some patterns to make it easier. It facilitates two cases:
 
