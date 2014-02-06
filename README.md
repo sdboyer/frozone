@@ -24,7 +24,7 @@ class Counter implements Freezable {
     public function incrementAndEcho() {
         $this->attemptWrite();
         // or $this->attemptWriteWithMethod(__METHOD__);
-        // or $this->attemptWriteWithMsg('What the exception will say if it's frozen');
+        // or $this->attemptWriteWithMessage('What the exception will say if it's frozen');
 
         // now, your method's state-changing logic.
         echo ++$this->callcount;
@@ -66,7 +66,7 @@ class Counter implements Lockable {
     public function incrementAndEcho() {
         $this->attemptWrite();
         // or $this->attemptWriteWithMethod(__METHOD__);
-        // or $this->attemptWriteWithMsg('What the exception will say if it's frozen');
+        // or $this->attemptWriteWithMessage('What the exception will say if it's frozen');
 
         // now, your method's state-changing logic.
         echo ++$this->callcount;
