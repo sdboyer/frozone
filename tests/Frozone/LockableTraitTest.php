@@ -13,11 +13,9 @@ class LockableTraitTest extends \PHPUnit_Framework_Testcase {
     public function testInitiallyUnlocked() {
         $stub = new LockableStub();
         $this->assertFalse($stub->doDefault());
+        $this->assertFalse($stub->doMethod());
+        $this->assertFalse($stub->doCustom('foo'));
     }
-
-    //public function testFreezeAlreadyFrozen() {
-    //$this->assertTrue($this->stub->freeze());
-    //}
 
     public function testDefaultException() {
         try {
@@ -48,14 +46,14 @@ class LockableTraitTest extends \PHPUnit_Framework_Testcase {
     }
 
     /**
-     * @expectedException Frozone\LockedObjectException
+     * @expectedException \Frozone\LockedObjectException
      */
     public function testUnlockWrongKey() {
         $this->stub->unlock('foo');
     }
 
     /**
-     * @expectedException Frozone\LockedObjectException
+     * @expectedException \Frozone\LockedObjectException
      */
     public function testUnlockNotLocked() {
         $stub = new LockableStub();

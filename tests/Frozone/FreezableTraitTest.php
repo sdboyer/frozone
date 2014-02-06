@@ -13,6 +13,8 @@ class FreezableTraitTest extends \PHPUnit_Framework_Testcase {
     public function testInitiallyNotFrozen() {
         $stub = new FreezableStub();
         $this->assertFalse($stub->doDefault());
+        $this->assertFalse($stub->doMethod());
+        $this->assertFalse($stub->doCustom('foo'));
     }
 
     public function testFreezeIsIdempotent() {
