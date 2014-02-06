@@ -1,0 +1,24 @@
+{
+    "name": "sdboyer/frozone",
+    "description": "Freeze and lock objects. Also makes you 23% more like Samuel L. Jackson.",
+    "license": "MIT",
+    "keywords": ["frozone", "state", "php", "library", "theincredibles"],
+    "homepage": "http://github.com/sdboyer/frozone",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Sam Boyer",
+            "email": "tech@samboyer.org"
+        }
+    ],
+    "require": {
+        "php": ">=5.4"
+    },
+    "require-dev": {
+      "satooshi/php-coveralls": "0.6.*",
+      "phpunit/phpunit": "3.7.*"
+    },
+    "autoload": {
+        "psr-0": { "Frozone": "src/" }
+    }
+}

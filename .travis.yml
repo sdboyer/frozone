@@ -1,0 +1,22 @@
+# .travis.yml
+language: php
+
+php:
+  - 5.4
+  - 5.5
+  - hhvm
+
+before_script:
+  - composer self-update
+  - composer install --dev --prefer-source
+
+script:
+  - mkdir -p build/logs
+  - phpunit -c phpunit.xml.dist
+
+after_script:
+  - php vendor/bin/coveralls -v
+
+matrix:
+  allow_failures:
+    - php: hhvm
