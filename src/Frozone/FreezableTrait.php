@@ -20,10 +20,7 @@ trait FreezableTrait /* implements Freezable */ {
     protected $_tfrozen = FALSE;
 
     public function freeze() {
-        $this->attemptWrite('', 'Object is already frozen.');
         $this->_tfrozen = TRUE;
-
-        return $this;
     }
 
     public function isFrozen() {
