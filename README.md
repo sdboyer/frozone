@@ -62,7 +62,7 @@ use Frozone\Lockable;
 use Frozone\LockableTrait;
 
 class Counter implements Lockable {
-    use FreezableTrait;
+    use LockableTrait;
 
     protected $callcount = 0;
 
