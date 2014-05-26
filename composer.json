@@ -22,6 +22,6 @@
         "psr-4": { "Frozone\\": "src/" }
     },
     "autoload-dev": {
-        "psr-4": { "Frozone\\": ["src/", "tests/"]}
+        "psr-4": { "Frozone\\": ["tests/"]}
     }
 }

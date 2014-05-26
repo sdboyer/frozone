@@ -2,7 +2,7 @@
 
 namespace Frozone;
 
-class FreezableTraitTest extends \PHPUnit_Framework_Testcase
+class FreezableTraitTest extends \PHPUnit_Framework_TestCase
 {
     protected $stub;
 
