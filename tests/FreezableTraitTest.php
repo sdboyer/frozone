@@ -2,46 +2,53 @@
 
 namespace Frozone;
 
-class FreezableTraitTest extends \PHPUnit_Framework_Testcase {
+class FreezableTraitTest extends \PHPUnit_Framework_Testcase
+{
     protected $stub;
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->stub = new FreezableStub();
         $this->stub->freeze();
     }
 
-    public function testInitiallyNotFrozen() {
+    public function testInitiallyNotFrozen()
+    {
         $stub = new FreezableStub();
         $this->assertFalse($stub->doDefault());
         $this->assertFalse($stub->doMethod());
         $this->assertFalse($stub->doCustom('foo'));
     }
 
-    public function testFreezeIsIdempotent() {
+    public function testFreezeIsIdempotent()
+    {
         $this->assertTrue($this->stub->isFrozen());
         $this->stub->freeze();
         $this->assertTrue($this->stub->isFrozen());
     }
 
-    public function testDefaultException() {
+    public function testDefaultException()
+    {
         try {
             $this->stub->doDefault();
             $this->fail();
+        } catch (FrozenObjectException $e) {
+            // no op
         }
-        catch (FrozenObjectException $e) {}
     }
 
-    public function testMethodException() {
+    public function testMethodException()
+    {
         try {
             $this->stub->doMethod();
             $this->fail();
-        }
-        catch (FrozenObjectException $e) {
+        } catch (FrozenObjectException $e) {
             $this->assertTrue((bool) strpos($e->getMessage(), 'FreezableStub::doMethod'));
         }
     }
 
-    public function testCustomException() {
+    public function testCustomException()
+    {
         try {
             $this->stub->doCustom('foobar');
             $this->fail();
@@ -55,18 +62,24 @@ class FreezableTraitTest extends \PHPUnit_Framework_Testcase {
 class FreezableStub {
     use FreezableTrait;
 
-    public function doDefault() {
+    public function doDefault()
+    {
         $this->attemptWrite();
-        return FALSE;
+
+        return false;
     }
 
-    public function doMethod() {
+    public function doMethod()
+    {
         $this->attemptWriteWithMethod(__METHOD__);
-        return FALSE;
+
+        return false;
     }
 
-    public function doCustom($msg) {
+    public function doCustom($msg)
+    {
         $this->attemptWriteWithMessage($msg);
-        return FALSE;
+
+        return false;
     }
 }

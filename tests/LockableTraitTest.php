@@ -2,35 +2,40 @@
 
 namespace Frozone;
 
-class LockableTraitTest extends \PHPUnit_Framework_Testcase {
+class LockableTraitTest extends \PHPUnit_Framework_Testcase
+{
     protected $stub;
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->stub = new LockableStub();
         $this->stub->lock('key');
     }
 
-    public function testInitiallyUnlocked() {
+    public function testInitiallyUnlocked()
+    {
         $stub = new LockableStub();
         $this->assertFalse($stub->doDefault());
         $this->assertFalse($stub->doMethod());
         $this->assertFalse($stub->doCustom('foo'));
     }
 
-    public function testDefaultException() {
+    public function testDefaultException()
+    {
         try {
             $this->stub->doDefault();
             $this->fail();
+        } catch (LockedObjectException $e) {
+            // no op
         }
-        catch (LockedObjectException $e) {}
     }
 
-    public function testMethodException() {
+    public function testMethodException()
+    {
         try {
             $this->stub->doMethod();
             $this->fail();
-        }
-        catch (LockedObjectException $e) {
+        } catch (LockedObjectException $e) {
             $this->assertTrue((bool) strpos($e->getMessage(), 'LockableStub::doMethod'));
         }
     }
@@ -39,8 +44,7 @@ class LockableTraitTest extends \PHPUnit_Framework_Testcase {
         try {
             $this->stub->doCustom('foobar');
             $this->fail();
-        }
-        catch (LockedObjectException $e) {
+        } catch (LockedObjectException $e) {
             $this->assertEquals('foobar', $e->getMessage());
         }
     }
@@ -48,19 +52,22 @@ class LockableTraitTest extends \PHPUnit_Framework_Testcase {
     /**
      * @expectedException \Frozone\LockedObjectException
      */
-    public function testUnlockWrongKey() {
+    public function testUnlockWrongKey()
+    {
         $this->stub->unlock('foo');
     }
 
     /**
      * @expectedException \Frozone\LockedObjectException
      */
-    public function testUnlockNotLocked() {
+    public function testUnlockNotLocked()
+    {
         $stub = new LockableStub();
         $stub->unlock('foo');
     }
 
-    public function testUnlock() {
+    public function testUnlock()
+    {
         $this->assertTrue($this->stub->unlock('key'));
     }
 }
@@ -68,18 +75,24 @@ class LockableTraitTest extends \PHPUnit_Framework_Testcase {
 class LockableStub {
     use LockableTrait;
 
-    public function doDefault() {
+    public function doDefault()
+    {
         $this->attemptWrite();
-        return FALSE;
+
+        return false;
     }
 
-    public function doMethod() {
+    public function doMethod()
+    {
         $this->attemptWriteWithMethod(__METHOD__);
-        return FALSE;
+
+        return false;
     }
 
-    public function doCustom($msg) {
+    public function doCustom($msg)
+    {
         $this->attemptWriteWithMessage($msg);
-        return FALSE;
+
+        return false;
     }
 }

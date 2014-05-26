@@ -8,8 +8,8 @@ namespace Frozone;
  * State can only be unlocked (that is, state can be mutated) by calling the
  * unlock method with the same key.
  */
-interface Lockable {
-
+interface Lockable
+{
     /**
      * Locks this object using the provided key.
      *
