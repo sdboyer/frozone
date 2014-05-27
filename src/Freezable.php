@@ -5,8 +5,8 @@ namespace Frozone;
 /**
  * Interface for 'freezing,' which permanently locks an object's state.
  */
-interface Freezable {
-
+interface Freezable
+{
     /**
      * Permanently freeze this object, preventing future state changes.
      *

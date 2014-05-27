@@ -8,8 +8,8 @@ namespace Frozone;
  * Make sure to begin any state-mutating method in the composed class with
  * a call to one of the $this->attemptWrite*() methods.
  */
-trait FreezableTrait /* implements Freezable */ {
-
+trait FreezableTrait
+{
     /**
      * State flag indicating whether or not this object is frozen.
      *
@@ -17,13 +17,15 @@ trait FreezableTrait /* implements Freezable */ {
      *
      * @var bool
      */
-    protected $_tfrozen = FALSE;
+    protected $_tfrozen = false;
 
-    public function freeze() {
-        $this->_tfrozen = TRUE;
+    public function freeze()
+    {
+        $this->_tfrozen = true;
     }
 
-    public function isFrozen() {
+    public function isFrozen()
+    {
         return $this->_tfrozen;
     }
 
@@ -32,7 +34,8 @@ trait FreezableTrait /* implements Freezable */ {
      *
      * @throws FrozenObjectException
      */
-    protected function attemptWrite() {
+    protected function attemptWrite()
+    {
         if ($this->isFrozen()) {
             throw new FrozenObjectException(sprintf('State-changing method called on frozen instance of %s.', __CLASS__));
         }
@@ -47,7 +50,8 @@ trait FreezableTrait /* implements Freezable */ {
      *
      * @throws FrozenObjectException
      */
-    protected function attemptWriteWithMethod($method) {
+    protected function attemptWriteWithMethod($method)
+    {
         if ($this->isFrozen()) {
             throw new FrozenObjectException(sprintf('State-changing method %s::%s called on a frozen object instance.', __CLASS__, $method));
         }
@@ -61,7 +65,8 @@ trait FreezableTrait /* implements Freezable */ {
      *
      * @throws FrozenObjectException
      */
-    protected function attemptWriteWithMessage($msg) {
+    protected function attemptWriteWithMessage($msg)
+    {
         if ($this->isFrozen()) {
             throw new FrozenObjectException($msg);
         }
